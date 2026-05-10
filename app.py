@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
-GROQ_KEY = "YOUR_GROQ_KEY"
+GROQ_KEY = os.getenv("GROQ_KEY")
 
 def ask_ai(text):
 
@@ -23,7 +24,10 @@ def ask_ai(text):
 
     r = requests.post(url, json=data, headers=headers)
 
-    return r.json()["choices"][0]["message"]["content"]
+    try:
+        return r.json()["choices"][0]["message"]["content"]
+    except:
+        return "Chyba AI odpovede"
 
 @app.route("/ask", methods=["POST"])
 def ask():
