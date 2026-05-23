@@ -3,7 +3,7 @@ import requests
 import os
 import tempfile
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 GROQ_KEY = os.getenv("GROQ_KEY")
 
@@ -95,5 +95,5 @@ def talk():
 def home():
     return "ESP32 AI Robot server is running!"
 
-if _name_ == "_main_":
+if _name_ == "__main__":
     app.run(host="0.0.0.0", port=10000)
